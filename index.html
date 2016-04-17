@@ -1,14 +1,81 @@
 <head>
-  <title>index</title>
+    <title>Life in a box</title>
 </head>
 
 <body>
-  <h1>Enter your settings</h1>
 
-  {{> hello}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-10 col-md-1">
+            <button class="btn btn-default" data-toggle="modal" data-target="#the-form"><span
+                    class=" glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+
+            <center><h1>Life in a box</h1></center>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+
+            {{>thebox}}
+
+        </div>
+    </div>
+</div>
+
+
+{{>theform}}
+
+
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+
+<template name="thebox">
+    <center><i>- weeks in a year -</i></center>
+
+   {{boxes}}
+
+
+
+
+</template>
+
+<template name="theform">
+
+    <!-- Modal -->
+    <div class="modal fade" id="the-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enter your life expectancy</h4>
+                </div>
+                <form class="theform" method="post">
+
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label>Enter your date of birth</label>
+                            <input class="form-control" type="date" name="dob" value="{{todayDate}}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter your expected lifespan</label>
+                            <input class="form-control" type="text" name="lifespan" value="90"/>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <input id="save" type="submit" class="btn btn-success" value="Show me!">
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
 </template>

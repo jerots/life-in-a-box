@@ -1,23 +1,70 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
+    Template.theform.rendered = function(){
+        dob = localStorage.getItem('dob');
+        lifespan = localStorage.getItem('lifespan');
+        if (dob == null || lifespan == null){
+            $('#the-form').modal('show');
+        } else {
+            Session.set('dob', dob);
+            Session.set('lifespan', lifespan);
+        }
+    };
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
+
+    Template.theform.helpers({
+        todayDate: function () {
+            today = new Date()
+            date = today.getDate();
+            month = today.getMonth() + 1;
+            if (month < 10){
+                month = "0" + month
+            }
+            year = today.getFullYear();
+            return year + "-" + month + "-" + date
+        }
+
+    });
+    Template.thebox.helpers({
+        boxes: function() {
+            lifespan = Session.get('lifespan');
+            dob = Session.get('dob');
+            result = "";
+            for (i = 0; i < lifespan; i++){
+
+                for (j = 0; j < 52; j++ ){
+                    result += "x"
+
+                }
+                result += "\n"
+            }
+
+            return result
+        }
+
+    });
+
+    Template.theform.events({
+        'submit .theform' : function(event) {
+
+            event.preventDefault();
+            target = event.target;
+            dob = target.dob.value;
+            lifespan = target.lifespan.value;
+
+            localStorage.setItem('dob',dob);
+            localStorage.setItem('lifespan',lifespan);
+
+            Session.set('lifespan', lifespan);
+            Session.set('dob', dob);
+
+            $('#the-form').modal('hide');
+        }
+    });
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+    Meteor.startup(function () {
+        // code to run on server at startup
+    });
 }

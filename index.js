@@ -48,14 +48,50 @@ if (Meteor.isClient) {
         boxes: function() {
             lifespan = Session.get('lifespan');
             dob = Session.get('dob');
+            dob = dob.split('-');
+
+            year = dob[0];
+            month = dob[1];
+            date = dob[2];
+
+            today = new Date();
+            thisYear = today.getFullYear();
+            thisMonth = today.getMonth() + 1;
+            thisDate = today.getDate();
+
             result = "";
-            for (i = 0; i < lifespan; i++){
 
+            yearsLived = thisYear - year;
+
+            // Show years lived
+            for (i = 0; i < yearsLived; i++){
                 for (j = 0; j < 52; j++ ){
-                    result += "x"
-
+                    result += "x";
                 }
-                result += "\n"
+                result += "\n";
+            }
+
+            // Show weeks lived
+            weeksLived = (thisMonth - month) * 4;
+            weeksLived += (thisDate - date)/7;
+            weeksLived = Math.round(weeksLived);
+            for (j = 0; j < weeksLived; j++ ){
+                result += "x"
+            }
+            // Show remaining weeks
+            weeksRemaining = 52 - weeksLived;
+            for (j = 0; j < weeksRemaining; j++ ){
+                result += "o"
+            }
+            result += "\n";
+
+            // Show remaining years
+            remainingYears = lifespan - yearsLived - 1;
+            for (i = 0; i < remainingYears; i++){
+                for (j = 0; j < 52; j++ ){
+                    result += "o";
+                }
+                result += "\n";
             }
 
             return result

@@ -22,6 +22,25 @@ if (Meteor.isClient) {
             }
             year = today.getFullYear();
             return year + "-" + month + "-" + date
+        },
+        fillDate: function() {
+
+            dob = Session.get('dob');
+            if (dob == null){
+                return Template.theform.__helpers.get('todayDate').call();
+            } else {
+                return dob;
+            }
+        },
+        fillLS: function(){
+            lifespan = Session.get('lifespan');
+            if (lifespan == null){
+                return 90;
+            } else {
+                return lifespan;
+            }
+
+
         }
 
     });

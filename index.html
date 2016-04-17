@@ -3,15 +3,12 @@
 </head>
 
 <body>
-
 <div class="container">
     <div class="row">
         <div class="col-md-offset-10 col-md-1">
             <button class="btn btn-default" data-toggle="modal" data-target="#the-form"><span
                     class=" glyphicon glyphicon-cog" aria-hidden="true"></span></button>
-
         </div>
-
     </div>
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -27,26 +24,16 @@
         </div>
     </div>
 </div>
-
-
 {{>theform}}
-
-
 </body>
 
 
 <template name="thebox">
     <center><i>- weeks in a year -</i></center>
-
    {{boxes}}
-
-
-
-
 </template>
 
 <template name="theform">
-
     <!-- Modal -->
     <div class="modal fade" id="the-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -61,21 +48,18 @@
                 <div class="modal-body">
                         <div class="form-group">
                             <label>Enter your date of birth</label>
-                            <input class="form-control" type="date" name="dob" value="{{todayDate}}"/>
+                            <input class="form-control" type="date" name="dob" value="{{fillDate}}"/>
                         </div>
                         <div class="form-group">
                             <label>Enter your expected lifespan</label>
-                            <input class="form-control" type="text" name="lifespan" value="90"/>
+                            <input class="form-control" type="text" name="lifespan" value="{{fillLS}}"/>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <input id="save" type="submit" class="btn btn-success" value="Show me!">
-
                 </div>
                 </form>
-
             </div>
         </div>
     </div>
-
 </template>

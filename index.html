@@ -5,20 +5,24 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-offset-3 col-md-6">
 
             <center><h1>Life in a box</h1></center>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <button class="btn btn-default" data-toggle="modal" data-target="#the-form"><span
                     class=" glyphicon glyphicon-cog" aria-hidden="true"></span></button>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-
-            {{>thebox}}
-
+        <div class="col-md-12">
+            <center><i>- weeks in a year -</i></center>
+            
+            <div id="boxes">
+                <center>
+                    {{>thebox}}
+                </center>
+            </div>
         </div>
     </div>
 </div>
@@ -27,8 +31,8 @@
 
 
 <template name="thebox">
-    <center><i>- weeks in a year -</i></center>
-   {{boxes}}
+
+    {{{boxes}}}
 </template>
 
 <template name="theform">
@@ -43,7 +47,7 @@
                 </div>
                 <form class="theform" method="post">
 
-                <div class="modal-body">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label>Enter your date of birth</label>
                             <input class="form-control" type="date" name="dob" value="{{fillDate}}"/>
@@ -52,10 +56,10 @@
                             <label>Enter your expected lifespan</label>
                             <input class="form-control" type="text" name="lifespan" value="{{fillLS}}"/>
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <input id="save" type="submit" class="btn btn-success" value="Show me!">
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="save" type="submit" class="btn btn-success" value="Show me!">
+                    </div>
                 </form>
             </div>
         </div>

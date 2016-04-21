@@ -26,10 +26,12 @@ body {
 
 .before {
    /*color:red;*/
+    font-size:8px;
 }
 
 .after {
     color:green;
+    font-size:8px;
 }
 
 #boxes {

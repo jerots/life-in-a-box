@@ -1,8 +1,8 @@
 if (Meteor.isClient) {
 
     Template.theform.rendered = function(){
-        dob = localStorage.getItem('dob');
-        lifespan = localStorage.getItem('lifespan');
+        var dob = localStorage.getItem('dob');
+        var lifespan = localStorage.getItem('lifespan');
         if (dob == null || lifespan == null){
             $('#the-form').modal('show');
         } else {
@@ -14,18 +14,18 @@ if (Meteor.isClient) {
 
     Template.theform.helpers({
         todayDate: function () {
-            today = new Date()
-            date = today.getDate();
-            month = today.getMonth() + 1;
+            var today = new Date();
+            var date = today.getDate();
+            var month = today.getMonth() + 1;
             if (month < 10){
                 month = "0" + month
             }
-            year = today.getFullYear();
-            return year + "-" + month + "-" + date
+            var year = today.getFullYear();
+            return year + "-" + month + "-" + date;
         },
         fillDate: function() {
 
-            dob = Session.get('dob');
+            var dob = Session.get('dob');
             if (dob == null){
                 return Template.theform.__helpers.get('todayDate').call();
             } else {
@@ -33,7 +33,7 @@ if (Meteor.isClient) {
             }
         },
         fillLS: function(){
-            lifespan = Session.get('lifespan');
+            var lifespan = Session.get('lifespan');
             if (lifespan == null){
                 return 90;
             } else {
@@ -46,52 +46,52 @@ if (Meteor.isClient) {
     });
     Template.thebox.helpers({
         boxes: function() {
-            lifespan = Session.get('lifespan');
-            dob = Session.get('dob');
+            var lifespan = Session.get('lifespan');
+            var dob = Session.get('dob');
             dob = dob.split('-');
 
-            year = dob[0];
-            month = dob[1];
-            date = dob[2];
+            var year = dob[0];
+            var month = dob[1];
+            var date = dob[2];
 
-            today = new Date();
-            thisYear = today.getFullYear();
-            thisMonth = today.getMonth() + 1;
-            thisDate = today.getDate();
+            var today = new Date();
+            var thisYear = today.getFullYear();
+            var thisMonth = today.getMonth() + 1;
+            var thisDate = today.getDate();
 
-            result = "";
+            var result = "";
 
-            yearsLived = thisYear - year;
+            var yearsLived = thisYear - year;
 
             // Show years lived
             for (i = 0; i < yearsLived; i++){
                 for (j = 0; j < 52; j++ ){
-                    result += "x";
+                    result += "<span class='glyphicon glyphicon-stop before'></span>";
                 }
-                result += "\n";
+                result += "<br>";
             }
 
             // Show weeks lived
-            weeksLived = (thisMonth - month) * 4;
+            var weeksLived = (thisMonth - month) * 4;
             weeksLived += (thisDate - date)/7;
             weeksLived = Math.round(weeksLived);
             for (j = 0; j < weeksLived; j++ ){
-                result += "x"
+                result += "<span class='glyphicon glyphicon-stop before'></span>"
             }
             // Show remaining weeks
-            weeksRemaining = 52 - weeksLived;
+            var weeksRemaining = 52 - weeksLived;
             for (j = 0; j < weeksRemaining; j++ ){
-                result += "o"
+                result += "<span class='glyphicon glyphicon-unchecked after'></span>"
             }
-            result += "\n";
+            result += "<br>";
 
             // Show remaining years
-            remainingYears = lifespan - yearsLived - 1;
+            var remainingYears = lifespan - yearsLived - 1;
             for (i = 0; i < remainingYears; i++){
                 for (j = 0; j < 52; j++ ){
-                    result += "o";
+                    result += "<span class='glyphicon glyphicon-unchecked after'></span>";
                 }
-                result += "\n";
+                result += "<br>";
             }
 
             return result
@@ -103,9 +103,9 @@ if (Meteor.isClient) {
         'submit .theform' : function(event) {
 
             event.preventDefault();
-            target = event.target;
-            dob = target.dob.value;
-            lifespan = target.lifespan.value;
+            var target = event.target;
+            var dob = target.dob.value;
+            var lifespan = target.lifespan.value;
 
             localStorage.setItem('dob',dob);
             localStorage.setItem('lifespan',lifespan);
